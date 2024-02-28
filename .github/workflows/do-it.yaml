@@ -43,6 +43,11 @@ jobs:
           ref: demo
       - name: Whats this?
         id: look
-        run: echo "content=$(cat demo.txt)" >> $GITHUB_OUTPUT
-      - run: echo "We looked and saw '${{ steps.look.outputs.content }}'"
+        run: |
+          echo "content=$(cat demo.txt)" >> $GITHUB_OUTPUT
+          echo "ACTION='we looked'" >> $GITHUB_ENV
+      - name: Check the output
+        run: |
+          echo "what did we do? ${{ env.ACTION }}"
+          echo "The content is '${{ steps.look.outputs.content }}'"
 
