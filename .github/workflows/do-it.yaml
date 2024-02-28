@@ -43,6 +43,6 @@ jobs:
           ref: demo
       - name: Whats this?
         id: look
-        run: echo "content=$(cat demo.txt)"
+        run: echo "content=$(cat demo.txt)" >> $GITHUB_OUTPUT
       - run: echo "We looked and saw '${{ steps.look.outputs.content }}'"
 
