@@ -31,5 +31,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: demo
       - name: Whats this?
         run: cat demo.txt
+  take-a-second-look:
+    runs-on: ubuntu-latest
+    needs:
+      - take-a-look
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: demo
+      - name: Whats this?
+        id: look
+        run: |
+          echo "content=$(cat demo.txt)" >> $GITHUB_OUTPUT
+          echo "ACTION='we looked'" >> $GITHUB_ENV
+      - name: Check the output
+        run: |
+          echo "What did we do? ${{ env.ACTION }}"
+          echo "The content is '${{ steps.look.outputs.content }}'"
