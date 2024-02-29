@@ -31,7 +31,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: demo
       - name: Whats this?
         run: cat demo.txt
